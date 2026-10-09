@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PORTAL SENAI CFP801 - APLICAÇÕES | São José do Rio Preto</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+  <!-- Google Fonts: Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap"
+    rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Montserrat', 'sans-serif'],
+          },
+          colors: {
+            senai: {
+              red: '#E30613',
+              darkred: '#B7040F',
+              black: '#111111',
+              darkgray: '#1C1C1E',
+              midgray: '#27272A',
+              lightgray: '#F4F4F6',
+              bordergray: '#E4E4E7',
+              textgray: '#71717A',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #F8F9FA;
+      color: #111111;
+    }
+
+    .senai-hero-overlay {
+      background: linear-gradient(135deg, rgba(17, 17, 17, 0.94) 0%, rgba(28, 28, 30, 0.88) 50%, rgba(227, 6, 19, 0.85) 100%);
+    }
+
+    .card-hover-effect {
+      transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .card-hover-effect:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 30px -8px rgba(227, 6, 19, 0.15), 0 8px 16px -6px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #cf101a;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #a3050e;
+    }
+  </style>
+</head>
+
+<body class="flex flex-col min-h-screen antialiased text-senai-black selection:bg-senai-red selection:text-white">
+
+  <!-- Top Utility Bar -->
+  <div class="bg-senai-black text-gray-300 text-xs py-2 px-4 border-b border-neutral-800">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center space-x-3">
+        <span class="inline-flex items-center gap-1.5 font-medium">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          Sistemas e Serviços Operacionais
+        </span>
+        <span class="hidden sm:inline text-neutral-600">|</span>
+        <span class="hidden sm:inline text-neutral-400">Escola SENAI "Antonio Devisate" • CFP 8.01</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <span id="currentDate" class="text-neutral-400 font-medium"></span>
+        <a href="https://sp.senai.br" target="_blank" rel="noopener noreferrer"
+          class="hover:text-white transition-colors flex items-center gap-1">
+          <span>Portal SENAI-SP</span>
+          <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Primary Header -->
+  <header
+    class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-senai-bordergray shadow-sm transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+
+      <!-- Brand & School identification -->
+      <div class="flex items-center space-x-4 sm:space-x-6">
+        <a href="#" class="flex items-center group focus:outline-none" title="Página Inicial - SENAI CFP 801">
+          <img src="senai-logo.png" alt="Logo SENAI"
+            class="h-10 sm:h-12 w-auto object-contain transition-transform group-hover:scale-105"
+            onerror="this.src='https://placehold.co/180x50/E30613/FFFFFF?text=SENAI'">
+        </a>
+        <div class="h-10 w-px bg-senai-bordergray hidden sm:block"></div>
+        <div class="leading-tight">
+          <h1 class="text-sm sm:text-base md:text-lg font-extrabold text-senai-black tracking-tight uppercase">
+            PORTAL CFP 801 <span class="text-senai-red font-bold">APLICAÇÕES</span>
+          </h1>
+          <p class="text-[11px] sm:text-xs text-senai-textgray font-medium">
+            São José do Rio Preto - SP
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Action Navigation -->
+      <div class="flex items-center space-x-2 sm:space-x-4">
+        <a href="#links-section"
+          class="hidden md:inline-flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wider text-senai-black bg-senai-lightgray hover:bg-neutral-200 rounded-lg transition-all">
+          <i class="fa-solid fa-layer-group text-senai-red"></i>
+          Aplicações
+        </a>
+        <a href="#unidade-info"
+          class="inline-flex items-center gap-2 px-3 sm:px-4 py-2 text-xs font-bold uppercase tracking-wider text-white bg-senai-red hover:bg-senai-darkred rounded-lg shadow-sm transition-all">
+          <i class="fa-solid fa-location-dot"></i>
+          <span class="hidden sm:inline">Unidade</span> CFP 801
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section with Background Photograph -->
+  <section class="relative bg-senai-black text-white overflow-hidden py-8 sm:py-10 lg:py-12">
+    <!-- Background Image & Gradient Overlay -->
+    <div class="absolute inset-0 z-0">
+      <img src="senai_rio_preto.jpg" alt="Fachada SENAI São José do Rio Preto"
+        class="w-full h-full object-cover object-center opacity-30 transform scale-105 filter blur-[0.5px]"
+        onerror="this.style.display='none'">
+      <div class="absolute inset-0 senai-hero-overlay"></div>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div
+        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[11px] font-semibold text-gray-200 mb-3 uppercase tracking-wider">
+        <i class="fa-solid fa-shield-halved text-senai-red"></i>
+        Central Unificada de Sistemas e Links Rápidos
+      </div>
+
+      <h2
+        class="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tight leading-tight max-w-3xl mx-auto uppercase">
+        PORTAL SENAI CFP801 <br class="hidden sm:block">
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-rose-200">APLICAÇÕES &
+          SISTEMAS</span>
+      </h2>
+
+    </div>
+  </section>
+
+  <!-- Applications & Quick Links Section -->
+  <main id="links-section" class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+
+    <div
+      class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-senai-bordergray gap-4">
+      <div>
+        <div class="flex items-center gap-2 text-senai-red font-bold text-xs uppercase tracking-widest mb-1">
+          <i class="fa-solid fa-rocket"></i> Acesso Direto
+        </div>
+        <h3 class="text-2xl sm:text-3xl font-extrabold text-senai-black tracking-tight">
+          Painel de Sistemas & Plataformas
+        </h3>
+      </div>
+      <p class="text-sm text-senai-textgray font-medium">
+        Clique no botão do sistema desejado para abrir o link
+      </p>
+    </div>
+
+    <!-- Applications Grid -->
+    <div id="appsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+      <!-- Card 1: Secretaria Virtual / TOTVS / SGE -->
+      <div
+        class="app-card bg-white rounded-2xl p-6 border-2 border-neutral-200 card-hover-effect flex flex-col justify-between">
+        <div>
+          <div class="flex items-start justify-between mb-4">
+            <div
+              class="w-12 h-12 rounded-xl bg-red-50 text-senai-red flex items-center justify-center text-xl font-bold border border-red-100">
+              <i class="fa-solid fa-user-graduate"></i>
+            </div>
+            <span
+              class="px-2.5 py-1 text-xs font-bold uppercase tracking-wider rounded-md bg-neutral-100 text-neutral-800">
+              Pedagógico
+            </span>
+          </div>
+          <h4 class="text-base sm:text-lg font-bold text-senai-black">
+            Pré-conselho de Sala
+          </h4>
+          <p class="text-xs sm:text-sm text-senai-textgray mt-2 leading-relaxed">
+            Registro e acompanhamento das informações do pré-conselho de sala.
+          </p>
+        </div>
+        <div class="mt-6 pt-4 border-t border-gray-100">
+          <a href="https://example.com/pre-conselho-sala" target="_blank" rel="noopener noreferrer"
+            aria-label="Acessar Pré-conselho de Sala"
+            class="w-full h-12 inline-flex items-center justify-between px-4 rounded-xl bg-senai-black hover:bg-senai-black text-white font-bold text-xs sm:text-sm transition-all uppercase tracking-wide shadow-sm">
+            <span>Acessar aplicação</span>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 2: AVA Moodle SENAI -->
+      <div
+        class="app-card bg-white rounded-2xl p-6 border-2 border-neutral-200 card-hover-effect flex flex-col justify-between">
+        <div>
+          <div class="flex items-start justify-between mb-4">
+            <div
+              class="w-12 h-12 rounded-xl bg-red-50 text-senai-red flex items-center justify-center text-xl font-bold border border-red-100">
+              <i class="fa-solid fa-chalkboard-user"></i>
+            </div>
+            <span
+              class="px-2.5 py-1 text-xs font-bold uppercase tracking-wider rounded-md bg-neutral-100 text-neutral-800">
+              Projetos
+            </span>
+          </div>
+          <h4 class="text-base sm:text-lg font-bold text-senai-black">
+            Pulso 801 - Gestão de Projetos
+          </h4>
+          <p class="text-xs sm:text-sm text-senai-textgray mt-2 leading-relaxed">
+            Acompanhamento de projetos, etapas, responsáveis e resultados da unidade.
+          </p>
+        </div>
+        <div class="mt-6 pt-4 border-t border-gray-100">
+          <a href="https://example.com/pulso-801" target="_blank" rel="noopener noreferrer"
+            aria-label="Acessar Pulso 801 - Gestão de Projetos"
+            class="w-full h-12 inline-flex items-center justify-between px-4 rounded-xl bg-senai-black hover:bg-senai-black text-white font-bold text-xs sm:text-sm transition-all uppercase tracking-wide shadow-sm">
+            <span>Acessar aplicação</span>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 3: Microsoft Office 365 & Teams -->
+      <div
+        class="app-card bg-white rounded-2xl p-6 border-2 border-neutral-200 card-hover-effect flex flex-col justify-between">
+        <div>
+          <div class="flex items-start justify-between mb-4">
+            <div
+              class="w-12 h-12 rounded-xl bg-neutral-100 text-neutral-900 flex items-center justify-center text-xl font-bold border border-neutral-200">
+              <i class="fa-brands fa-microsoft"></i>
+            </div>
+            <span
+              class="px-2.5 py-1 text-xs font-bold uppercase tracking-wider rounded-md bg-neutral-100 text-neutral-800">
+              Validação
+            </span>
+          </div>
+          <h4 class="text-base sm:text-lg font-bold text-senai-black">
+            ValidaWeb - Validação de Arquivos HTML
+          </h4>
+          <p class="text-xs sm:text-sm text-senai-textgray mt-2 leading-relaxed">
+            Validação e conferência de arquivos HTML.
+          </p>
+        </div>
+        <div class="mt-6 pt-4 border-t border-gray-100">
+          <a href="https://example.com/validaweb" target="_blank" rel="noopener noreferrer"
+            aria-label="Acessar ValidaWeb - Validação de Arquivos HTML"
+            class="w-full h-12 inline-flex items-center justify-between px-4 rounded-xl bg-senai-black hover:bg-senai-black text-white font-bold text-xs sm:text-sm transition-all uppercase tracking-wide shadow-sm">
+            <span>Acessar aplicação</span>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 4: Biblioteca Virtual SENAI -->
+      <div
+        class="app-card bg-white rounded-2xl p-6 border-2 border-neutral-200 card-hover-effect flex flex-col justify-between">
+        <div>
+          <div class="flex items-start justify-between mb-4">
+            <div
+              class="w-12 h-12 rounded-xl bg-red-50 text-senai-red flex items-center justify-center text-xl font-bold border border-red-100">
+              <i class="fa-solid fa-book-bookmark"></i>
+            </div>
+            <span
+              class="px-2.5 py-1 text-xs font-bold uppercase tracking-wider rounded-md bg-neutral-100 text-neutral-800">
+              Programação
+            </span>
+          </div>
+          <h4 class="text-base sm:text-lg font-bold text-senai-black">
+            PythonBlock - Consolide seu conhecimento em Python
+          </h4>
+          <p class="text-xs sm:text-sm text-senai-textgray mt-2 leading-relaxed">
+            Pratique Python e consolide conhecimentos de programação.
+          </p>
+        </div>
+        <div class="mt-6 pt-4 border-t border-gray-100">
+          <a href="https://example.com/pythonblock" target="_blank" rel="noopener noreferrer"
+            aria-label="Acessar PythonBlock - Consolide seu conhecimento em Python"
+            class="w-full h-12 inline-flex items-center justify-between px-4 rounded-xl bg-senai-black hover:bg-senai-black text-white font-bold text-xs sm:text-sm transition-all uppercase tracking-wide shadow-sm">
+            <span>Acessar aplicação</span>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 5: Plataforma Meu SENAI / Carreiras -->
+      <div
+        class="app-card bg-white rounded-2xl p-6 border-2 border-neutral-200 card-hover-effect flex flex-col justify-between">
+        <div>
+          <div class="flex items-start justify-between mb-4">
+            <div
+              class="w-12 h-12 rounded-xl bg-neutral-100 text-senai-red flex items-center justify-center text-xl font-bold border border-neutral-200">
+              <i class="fa-solid fa-briefcase"></i>
+            </div>
+            <span
+              class="px-2.5 py-1 text-xs font-bold uppercase tracking-wider rounded-md bg-neutral-100 text-neutral-800">
+              Ambientes
+            </span>
+          </div>
+          <h4 class="text-base sm:text-lg font-bold text-senai-black">
+            SIPAE - Gerenciamento de Ambientes Escolares
+          </h4>
+          <p class="text-xs sm:text-sm text-senai-textgray mt-2 leading-relaxed">
+            Gerenciamento de ambientes escolares e recursos da unidade.
+          </p>
+        </div>
+        <div class="mt-6 pt-4 border-t border-gray-100">
+          <a href="https://example.com/sipae" target="_blank" rel="noopener noreferrer"
+            aria-label="Acessar SIPAE - Gerenciamento de Ambientes Escolares"
+            class="w-full h-12 inline-flex items-center justify-between px-4 rounded-xl bg-senai-black hover:bg-senai-black text-white font-bold text-xs sm:text-sm transition-all uppercase tracking-wide shadow-sm">
+            <span>Acessar aplicação</span>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 6: Portal de Cursos e Inscrições CFP 801 -->
+      <div
+        class="app-card bg-white rounded-2xl p-6 border-2 border-neutral-200 card-hover-effect flex flex-col justify-between">
+        <div>
+          <div class="flex items-start justify-between mb-4">
+            <div
+              class="w-12 h-12 rounded-xl bg-red-50 text-senai-red flex items-center justify-center text-xl font-bold border border-red-100">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <span
+              class="px-2.5 py-1 text-xs font-bold uppercase tracking-wider rounded-md bg-neutral-100 text-neutral-800">
+              Apoio educacional
+            </span>
+          </div>
+          <h4 class="text-base sm:text-lg font-bold text-senai-black">
+            GAE - Gestão de Apoio Educacional
+          </h4>
+          <p class="text-xs sm:text-sm text-senai-textgray mt-2 leading-relaxed">
+            Gestão de solicitações e ações de apoio educacional.
+          </p>
+        </div>
+        <div class="mt-6 pt-4 border-t border-gray-100">
+          <a href="https://example.com/gae" target="_blank" rel="noopener noreferrer"
+            aria-label="Acessar GAE - Gestão de Apoio Educacional"
+            class="w-full h-12 inline-flex items-center justify-between px-4 rounded-xl bg-senai-black hover:bg-senai-black text-white font-bold text-xs sm:text-sm transition-all uppercase tracking-wide shadow-sm">
+            <span>Acessar aplicação</span>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer id="unidade-info" class="bg-senai-darkgray text-white border-t border-neutral-800 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12">
+
+        <!-- Column 1: Brand & Presentation -->
+        <div class="lg:col-span-4 space-y-4">
+          <img src="senai-logo.png" alt="SENAI" class="h-10 w-auto object-contain"
+            onerror="this.src='https://placehold.co/160x45/E30613/FFFFFF?text=SENAI'">
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Serviço Nacional de Aprendizagem Industrial - Departamento Regional de São Paulo. Formando profissionais
+            capacitados para o futuro da indústria brasileira.
+          </p>
+          
+        </div>
+
+        <!-- Column 2: Specific Unit Data (CFP 801 - São José do Rio Preto) -->
+        <div class="lg:col-span-5 space-y-4">
+          <h4 class="text-xs font-bold text-senai-red uppercase tracking-wider">
+            Unidade São José do Rio Preto (CFP 801)
+          </h4>
+          <p class="text-sm font-semibold text-white">
+            Escola SENAI "Antonio Devisate"
+          </p>
+
+          <ul class="space-y-3 text-xs sm:text-sm text-gray-300">
+            <li class="flex items-start gap-2.5">
+              <i class="fa-solid fa-location-dot text-senai-red text-base mt-0.5"></i>
+              <div>
+                <strong class="text-white block font-medium">Endereço:</strong>
+                <span>R. Antônio de Godoy, 5405 - Vila Sao Jose, São José do Rio Preto - SP, 15090-250</span>
+              </div>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <i class="fa-solid fa-phone text-senai-red text-base"></i>
+              <div>
+                <strong class="text-white">Telefone:</strong>
+                <a href="tel:1721389666"
+                  class="hover:text-white transition-colors ml-1 underline decoration-neutral-600">(17) 2138-9666</a>
+              </div>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <i class="fa-solid fa-clock text-senai-red text-base mt-0.5"></i>
+              <span>
+                Horário de Atendimento da Secretaria:<br>
+                Segunda a Sexta: 08h00 às 20h00 | Sábado: 08h00 às 12h00
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Institutional Links -->
+        <div class="lg:col-span-3 space-y-4">
+          <h4 class="text-xs font-bold text-senai-red uppercase tracking-wider">
+            Links Úteis
+          </h4>
+          <ul class="space-y-2 text-xs text-gray-400 font-medium">
+            <li>
+              <a href="https://sp.senai.br/transparencia" target="_blank" rel="noopener noreferrer"
+                class="hover:text-white transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-chevron-right text-[10px] text-senai-red"></i>
+                Portal da Transparência
+              </a>
+            </li>
+            <li>
+              <a href="https://sp.senai.br/privacidade" target="_blank" rel="noopener noreferrer"
+                class="hover:text-white transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-chevron-right text-[10px] text-senai-red"></i>
+                Política de Privacidade / LGPD
+              </a>
+            </li>
+            <li>
+              <a href="https://riopreto.sp.senai.br" target="_blank" rel="noopener noreferrer"
+                class="hover:text-white transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-chevron-right text-[10px] text-senai-red"></i>
+                Site Oficial CFP 801
+              </a>
+            </li>
+            <li>
+              <a href="https://fiesp.com.br" target="_blank" rel="noopener noreferrer"
+                class="hover:text-white transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-chevron-right text-[10px] text-senai-red"></i>
+                Sistema FIESP / CIESP / SESI
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Copyright & System Status -->
+      <div
+        class="mt-12 pt-6 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between text-xs text-neutral-500 gap-4">
+        <p>
+          &copy; <span id="currentYear"></span> SENAI-SP • Escola SENAI "Antonio Devisate" CFP 801. Todos os direitos
+          reservados.
+        </p>
+        <p class="font-medium text-neutral-400">
+          PORTAL SENAI CFP801 - APLICAÇÕES
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+      // Set dynamic current date in header and year in footer
+      (function initDate() {
+        const now = new Date();
+        const options = { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' };
+        const formattedDate = now.toLocaleDateString('pt-BR', options);
+        const dateEl = document.getElementById('currentDate');
+        if (dateEl) dateEl.textContent = formattedDate;
+
+        const yearEl = document.getElementById('currentYear');
+        if (yearEl) yearEl.textContent = now.getFullYear();
+      })();
+  </script>
+</body>
+
+</html>
